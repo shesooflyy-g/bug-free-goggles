@@ -84,12 +84,12 @@ try:
         'default': {
             'ENGINE': 'djongo',
             'NAME': 'octofit_db',
-            'ENFORCE_SCHEMA': False,
+            'ENFORCE_SCHEMA': False,  # Disable schema validation for MongoDB
             'CLIENT': {
                 'host': 'localhost',
                 'port': 27017,
-                'username': 'your_username',  # Replace with actual username
-                'password': 'your_password',  # Replace with actual password
+                'username': '',  # Add username if authentication is required
+                'password': '',  # Add password if authentication is required
                 'authSource': 'admin',
                 'authMechanism': 'SCRAM-SHA-1',
             },
