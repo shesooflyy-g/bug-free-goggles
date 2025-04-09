@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "octofit_tracker_app",
     "corsheaders",
+    "octofit_tracker",
 ]
 
 MIDDLEWARE = [
@@ -78,12 +79,8 @@ WSGI_APPLICATION = "octofit_tracker.wsgi.application"
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'your_database_name',
-        'USER': 'your_database_user',
-        'PASSWORD': 'your_database_password',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'ENGINE': 'djongo',
+        'NAME': 'octofit_db',
     }
 }
 
