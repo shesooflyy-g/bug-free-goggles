@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+import logging
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -78,12 +79,25 @@ WSGI_APPLICATION = "octofit_tracker.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'djongo',
-        'NAME': 'octofit_db',
+try:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'djongo',
+            'NAME': 'octofit_db',
+            'ENFORCE_SCHEMA': False,
+            'CLIENT': {
+                'host': 'localhost',
+                'port': 27017,
+                'username': 'your_username',  # Replace with actual username
+                'password': 'your_password',  # Replace with actual password
+                'authSource': 'admin',
+                'authMechanism': 'SCRAM-SHA-1',
+            },
+        }
     }
-}
+except Exception as e:
+    logging.error(f"Database configuration error: {e}")
+    raise
 
 
 # Password validation
@@ -147,3 +161,18 @@ CORS_ALLOW_METHODS = [
     'OPTIONS',
 ]
 CORS_ALLOW_HEADERS = ['*']
+
+# Configure logging for debugging
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'root': {
+        'handlers': ['console'],
+        'level': 'DEBUG',
+    },
+}
